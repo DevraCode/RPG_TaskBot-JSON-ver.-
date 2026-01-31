@@ -36,6 +36,14 @@ async def start(update:Update, context):
             "completed_tasks": []
         }
 
+        persistence.CHARACTER[user_id] = {
+             'character_id': "",
+             'character_name':user,
+             'character_type':"",
+             'character_exp': 0,
+             'character_level': 0
+        }
+
         
         await context.bot.send_message(chat_id = chat_id, text=f"Hola, {user}, utiliza el comando /help para ver una lista de comandos disponibles")
         print(f"DEBUG: Nuevo usuario registrado: {user}")
