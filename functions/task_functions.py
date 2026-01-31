@@ -168,6 +168,7 @@ async def delete_button(update:Update, context:CallbackContext):
     keyboard.append([InlineKeyboardButton("Terminar Eliminación", callback_data="CANCEL_DELETE")]) #Se añade un botón de Terminar Eliminación
     reply_markup = InlineKeyboardMarkup(keyboard)
 
+    #Se edita el primer mensaje
     await query.edit_message_text(
         "Tarea eliminada. Toca otra para seguir borrando:",
         reply_markup=reply_markup
