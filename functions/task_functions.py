@@ -76,8 +76,6 @@ async def show_pending_tasks(update:Update, context):
 
         mensaje = f"📋 Tienes las siguientes tareas pendientes: \n\n"
 
-        
-
         #Si no hay tareas pendientes
         if not tasks:
             await update.message.reply_text(text=f"No hay tareas para mostrar", parse_mode="MarkdownV2")
@@ -97,49 +95,63 @@ async def show_pending_tasks(update:Update, context):
 #---------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------
 
-DELETE = range(1)
+"""Borrar las tareas pendientes"""
 
+
+DELETE = range(1) #Estado del ConversationHandler
+
+#Función que solo muestra la lista de tareas pendientes como botones de teclado 
 async def delete_task(update:Update, context:CallbackContext):
 
     chat_id = update.effective_chat.id
 
-    if chat_id not in persistence.TASKLIST or not persistence.TASKLIST[chat_id].get("pending_tasks"):
+    user_id = generate_id(chat_id)
+
+    #Si el usuario no existe o no tiene tareas pendientes
+    if user_id not in persistence.TASKLIST or not persistence.TASKLIST[user_id].get("pending_tasks"):
         await update.message.reply_text("¡No tienes tareas pendientes para borrar!")
         return ConversationHandler.END 
 
+
     else:
-        user_tasklist = persistence.TASKLIST[chat_id]["pending_tasks"]
+        user_tasklist = persistence.TASKLIST[user_id]["pending_tasks"]
         keyboard = []
         
-        #Create a row for each task
+        #Crea una fila para cada tarea
         for index,task in enumerate(user_tasklist):
                 keyboard.append([InlineKeyboardButton(f"{task.capitalize()}", callback_data=task)])
 
         
-        keyboard.append([InlineKeyboardButton("Cancelar", callback_data="CANCEL_DELETE")])
-        reply_markup = InlineKeyboardMarkup(keyboard)
+        keyboard.append([InlineKeyboardButton("Cancelar", callback_data="CANCEL_DELETE")]) #Añade las filas al teclado en forma de botones
+        reply_markup = InlineKeyboardMarkup(keyboard) #"Materaliza" el teclado visualmente
                 
         await update.message.reply_text(text=f"Tienes las siguientes tareas pendientes, ¿Cual quieres borrar?:", reply_markup=reply_markup)
-        return DELETE
+        return DELETE #Pasa al estado DELETE, que llama a la función delete_button
 
     
-
+#Función que hace interactuables los botones
 async def delete_button(update:Update, context:CallbackContext):
     chat_id = update.effective_chat.id
-    query = update.callback_query
-    await query.answer()
+    user_id = generate_id(chat_id)
 
-    data = query.data
-
-    user_tasklist = persistence.TASKLIST[chat_id]["pending_tasks"]
     
+    query = update.callback_query #Almacena la opción escogida por el usuario y los datos del mismo
+    await query.answer() #Elimina el estado de carga, se puede un mensaje entre los parentésis
 
-    if chat_id in persistence.TASKLIST:
+    data = query.data #Obtiene los callback_data definidos en cada boton de la función delete_task, para condicionar las opciones mediante ifs
 
+
+    user_tasklist = persistence.TASKLIST[user_id]["pending_tasks"]
+
+    #Si el usuario existe
+    if user_id in persistence.TASKLIST:
+
+        #Si el usuario presionó "Cancelar"
         if data == "CANCEL_DELETE":
             await query.edit_message_text("Operación de eliminación de tareas cancelada.")
             return ConversationHandler.END
 
+        #El usuario pulsa sobre una tarea de la lista y esta se eliminará
         if data in user_tasklist:
             user_tasklist.remove(data)
 
@@ -148,11 +160,12 @@ async def delete_button(update:Update, context:CallbackContext):
             await query.edit_message_text("✅ ¡Todas las tareas han sido eliminadas! Conversación finalizada.")
             return ConversationHandler.END
 
+        #IMPORTANTE: Por cada tarea borrada, se debe reconstruir el teclado, ya que Telegram no es dinámico, se debe hacer manualmente 
         keyboard = []
         for task in user_tasklist:
             keyboard.append([InlineKeyboardButton(f"{task.capitalize()}", callback_data=task)])
         
-    keyboard.append([InlineKeyboardButton("Terminar Eliminación", callback_data="CANCEL_DELETE")])
+    keyboard.append([InlineKeyboardButton("Terminar Eliminación", callback_data="CANCEL_DELETE")]) #Se añade un botón de Terminar Eliminación
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await query.edit_message_text(
