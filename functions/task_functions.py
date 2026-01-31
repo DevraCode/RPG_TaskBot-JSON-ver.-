@@ -76,7 +76,7 @@ async def show_pending_tasks(update:Update, context):
 
         mensaje = f"📋 Tienes las siguientes tareas pendientes: \n\n"
 
-        botones = []
+        
 
         #Si no hay tareas pendientes
         if not tasks:
@@ -85,13 +85,9 @@ async def show_pending_tasks(update:Update, context):
         
         else:
             for task in tasks:
-                #mensaje += f"• {task.capitalize()}\n"
-                boton = InlineKeyboardButton(text = f"✨ {task.capitalize()}", callback_data=f"")
-                botones.append([boton])
+                mensaje += f"• ✨ {task.capitalize()}\n"
                 
-        markup = InlineKeyboardMarkup(botones)
-        
-        await update.message.reply_text(mensaje, reply_markup=markup, parse_mode="MarkdownV2")
+        await update.message.reply_text(mensaje, parse_mode="MarkdownV2")
             
     
     else:
