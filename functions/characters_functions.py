@@ -25,5 +25,5 @@ async def show_characters(update:Update,context:CallbackContext):
 
         keyboard.append(buttons)
         reply_markup = InlineKeyboardMarkup(keyboard)
-        await update.message.reply_text(show_male_mage(), reply_markup=reply_markup)
+        
 
