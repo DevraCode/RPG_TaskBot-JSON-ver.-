@@ -25,13 +25,10 @@ async def male_warrior(update:Update,context):
     user_id = generate_id(chat_id)
     user = update.effective_user.first_name
 
-    sticker_id = update.message.sticker.file_id
-
     persistence.CHARACTER[user_id] = {
-             'character_id': sticker_id,
              'character_name':user,
              'character_img': "assets/characters/warrior/male_warrior_01.webm",
-             'character_type':"male_mage",
+             'character_type':"male_warrior",
              'character_exp': 0,
              'character_level': 0
     }
@@ -42,8 +39,8 @@ async def male_warrior(update:Update,context):
     
     mensaje = f"Nombre: {name}" + "\n" + f"Nivel: {level}" + "\n" + f"EXP: {exp}"
 
-    await context.bot.send_sticker(chat_id = chat_id, sticker = persistence.CHARACTER[user_id]['character_img'])
-    await context.bot.send_message(chat_id=chat_id, text=mensaje)
+    await update.effective_chat.send_sticker(sticker=persistence.CHARACTER[user_id]['character_img'])
+    await update.effective_message.reply_text(mensaje)
 
 
 #Guerrera
@@ -52,13 +49,10 @@ async def female_warrior(update:Update,context):
     user_id = generate_id(chat_id)
     user = update.effective_user.first_name
 
-    sticker_id = update.message.sticker.file_id
-
     persistence.CHARACTER[user_id] = {
-             'character_id': sticker_id,
              'character_name':user,
              'character_img': "assets/characters/warrior/female_warrior_01.webm",
-             'character_type':"male_mage",
+             'character_type':"female_warrior",
              'character_exp': 0,
              'character_level': 0
     }
@@ -69,8 +63,8 @@ async def female_warrior(update:Update,context):
     
     mensaje = f"Nombre: {name}" + "\n" + f"Nivel: {level}" + "\n" + f"EXP: {exp}"
 
-    await context.bot.send_sticker(chat_id = chat_id, sticker = persistence.CHARACTER[user_id]['character_img'])
-    await context.bot.send_message(chat_id=chat_id, text=mensaje)
+    await update.effective_chat.send_sticker(sticker=persistence.CHARACTER[user_id]['character_img'])
+    await update.effective_message.reply_text(mensaje)
 
 
 #MAGOS
@@ -83,10 +77,7 @@ async def male_mage(update:Update,context):
     user_id = generate_id(chat_id)
     user = update.effective_user.first_name
 
-    sticker_id = update.message.sticker.file_id
-
     persistence.CHARACTER[user_id] = {
-             'character_id': sticker_id,
              'character_name':user,
              'character_img': "assets/characters/mage/male_mage_01.webm",
              'character_type':"male_mage",
@@ -100,8 +91,8 @@ async def male_mage(update:Update,context):
     
     mensaje = f"Nombre: {name}" + "\n" + f"Nivel: {level}" + "\n" + f"EXP: {exp}"
 
-    await context.bot.send_sticker(chat_id = chat_id, sticker = persistence.CHARACTER[user_id]['character_img'])
-    await context.bot.send_message(chat_id=chat_id, text=mensaje)
+    await update.effective_chat.send_sticker(sticker=persistence.CHARACTER[user_id]['character_img'])
+    await update.effective_message.reply_text(mensaje)
 
 #Maga
 async def female_mage(update:Update,context):
@@ -109,13 +100,10 @@ async def female_mage(update:Update,context):
     user_id = generate_id(chat_id)
     user = update.effective_user.first_name
 
-    sticker_id = update.message.sticker.file_id
-
     persistence.CHARACTER[user_id] = {
-             'character_id': sticker_id,
              'character_name':user,
              'character_img': "assets/characters/mage/female_mage_01.webm",
-             'character_type':"male_mage",
+             'character_type':"female_mage",
              'character_exp': 0,
              'character_level': 0
     }
@@ -126,7 +114,7 @@ async def female_mage(update:Update,context):
     
     mensaje = f"Nombre: {name}" + "\n" + f"Nivel: {level}" + "\n" + f"EXP: {exp}"
 
-    await context.bot.send_sticker(chat_id = chat_id, sticker = persistence.CHARACTER[user_id]['character_img'])
-    await context.bot.send_message(chat_id=chat_id, text=mensaje)
+    await update.effective_chat.send_sticker(sticker=persistence.CHARACTER[user_id]['character_img'])
+    await update.effective_message.reply_text(mensaje)
 
 
