@@ -29,9 +29,18 @@ Como si un juego de rol se tratase, el usuario eligirá a uno de los personajes 
 Para empezar a utilizar el bot, el usuario deberá buscar @RPG_Taskbot en el buscador de Telegram
 ![Telegram_bot1](https://github.com/user-attachments/assets/e787f25c-07a3-4ab6-bdcd-2543ce6ff45e)
 
+Al abrir el chat con el bot, click en Iniciar y se abrirá automáticamente el comando /start
+
+![Telegram_bot2_edited](https://github.com/user-attachments/assets/905aeb3a-c74e-4e91-ab9e-e5f22303c876)
+
+
+Y el bot responderá con un mensaje de bienvenida al usuario, en el que saludará al mismo (mi nombre de usuario está censurado en la imagen) y le explicará brevemente el funcionamiento del bot.
+
+![Telegram_bot3_edited_2](https://github.com/user-attachments/assets/69a6a570-c33c-435e-add4-6093588cefed)
 
 ### Comandos del bot
-/start -> Inicializa el bot y almacena al usuario y sus datos en un archivo JSON  
+/start -> Inicializa el bot y almacena al usuario y sus datos en un archivo JSON 
+
 /addtask (nombre de la tarea) -> Añade una tarea como argumento tras el comando a la lista de tareas. Ej: /addtask Hacer la compra  
 /showtasks -> Muestra la lista de tareas pendientes del usuario  
 /comtask -> Muestra la lista de tareas pendientes y permite marcar las tareas realizadas como completadas  
