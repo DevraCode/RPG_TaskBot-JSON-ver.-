@@ -6,7 +6,7 @@ from telegram import Update
 #---------------------------------------------------------------------------------------------------
 import data.persistence as persistence
 from data.time_zone import ZONE
-from data.security import generate_id
+from data.security import generate_id, verify_user
 
 
 #BASIC FUNCTIONS
@@ -19,7 +19,6 @@ async def start(update:Update, context):
     chat_id = update.effective_chat.id #Obtiene el id del chat
     user = update.effective_user.first_name #Obtiene el nombre del usuario
     
-
     user_id = generate_id(chat_id) #Id del usuario que va a ser almacenada
    
 
@@ -53,30 +52,17 @@ async def start(update:Update, context):
 
 #---------------------------------------------------------------------------------------------------
 
-#Función que borra al usuario del bot
-async def delete_user(update:Update, context):
-
-    chat_id = update.effective_chat.id
-
-    user_id = generate_id(chat_id) #Se calcula el id del usuario
-
-    #Si el usuario está en nuestra base de datos, se borran todos sus datos, tareas y recordatorios
-    if user_id in persistence.REGISTERED_USERS:
+#Función que borra al usuario del bot, su personaje, su lista de tareas y sus recordatorios
+@verify_user
+async def delete_user(update:Update, context, user_id):
         
-        persistence.REGISTERED_USERS.pop(user_id)
-        persistence.TASKLIST.pop(user_id)
+    persistence.REGISTERED_USERS.pop(user_id)
+    persistence.TASKLIST.pop(user_id)
 
-        current_jobs = context.job_queue.get_jobs_by_name(str(user_id))
-        for job in current_jobs:
-            job.schedule_removal()
+    current_jobs = context.job_queue.get_jobs_by_name(str(user_id))
+    for job in current_jobs:
+        job.schedule_removal()
     
-        await update.message.reply_text(f"Usuario borrado con éxito")
-
-    
-    #Si no está en el sistema, se le dice que no está registrado
-    else:
-        await update.message.reply_text(f"No eres un usuario registrado")
-
-
+    await update.message.reply_text(f"Usuario borrado con éxito")
 
     #---------------------------------------------------------------------------------------------------

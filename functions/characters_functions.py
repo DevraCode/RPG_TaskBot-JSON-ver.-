@@ -29,7 +29,7 @@ character_type = ["Guerrero", "Guerrera", "Mago", "Maga"]
 
 #Muestra el primer personaje de la lista, y a partir de ahi, los demás
 @verify_user
-async def show_characters(update: Update, context: CallbackContext):
+async def show_characters(update: Update, context: CallbackContext, user_id):
     
     chat_id = update.effective_chat.id
     

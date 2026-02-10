@@ -1,6 +1,5 @@
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, InputMedia
-from telegram.ext import CallbackContext, ConversationHandler
-
+from telegram import Update
+from telegram.ext import CallbackContext
 
 
 import os
@@ -35,7 +34,7 @@ def verify_user(func):
         if user_id not in persistence.REGISTERED_USERS:
             await context.bot.send_message(chat_id=chat_id, text=f"Debes ser usuario registrado")
             return
-        return await func(update,context,*args,**kwargs)
+        return await func(update,context,user_id = user_id,*args,**kwargs)
     return verify
 
 

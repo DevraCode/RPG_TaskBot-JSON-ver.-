@@ -17,22 +17,12 @@ from data.security import generate_id, verify_user, has_character_selected
 TASK_NAME = range(1)
 
 #Pregunta primero el nombre de la tarea
-@has_character_selected
-async def new_task(update:Update, context:CallbackContext):
-    chat_id = update.effective_chat.id
-
-    user_id = generate_id(chat_id) #Obtener el id del usuario
-
-    #Comprobar que el usuario existe en el sistema
-    if user_id in persistence.TASKLIST:
-        await update.message.reply_text(f"Escribe un nombre para la tarea")
-        return TASK_NAME
+@verify_user #Verifica que exista el usuario
+@has_character_selected #Verifica que el usuario haya elegido personaje
+async def new_task(update:Update, context:CallbackContext, user_id):
+    await update.message.reply_text(f"Escribe un nombre para la tarea")
+    return TASK_NAME
         
-    #Si el usuario no existe
-    else:
-       await update.message.reply_text(f"Usa el comando /start primero")
-       return ConversationHandler.END
-    
 
 #Añade la tarea a la lista   
 async def add_task(update:Update, context:CallbackContext):
