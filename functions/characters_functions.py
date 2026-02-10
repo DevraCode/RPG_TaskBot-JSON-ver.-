@@ -102,3 +102,15 @@ async def characters_buttons(update: Update, context: CallbackContext):
     
 #---------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------
+
+def character_exp_up(user_id):
+
+    user_completed_tasks = persistence.TASKLIST[user_id]["completed_tasks"]
+    character_exp = persistence.CHARACTER[user_id]["character_exp"]
+
+    contador = 0
+
+    for task in user_completed_tasks:
+        contador+=150
+
+    print(contador)

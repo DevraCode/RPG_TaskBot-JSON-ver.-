@@ -8,6 +8,8 @@ from telegram.ext import CallbackContext, ConversationHandler
 import data.persistence as persistence
 from data.security import generate_id, verify_user, has_character_selected
 
+from functions.characters_functions import character_exp_up
+
 
 #TASK FUNCTIONS
 #---------------------------------------------------------------------------------------------------
@@ -198,6 +200,8 @@ async def complete_task(update:Update, context:CallbackContext):
         return COMPLETE
     
 
+
+
 async def complete_button(update:Update, context:CallbackContext):
     chat_id = update.effective_chat.id
     user_id = generate_id(chat_id)
@@ -209,7 +213,7 @@ async def complete_button(update:Update, context:CallbackContext):
 
     user_tasklist = persistence.TASKLIST[user_id]["pending_tasks"]
     user_completed_tasks = persistence.TASKLIST[user_id]["completed_tasks"]
-    
+
 
     if user_id in persistence.TASKLIST:
 
@@ -220,7 +224,9 @@ async def complete_button(update:Update, context:CallbackContext):
         if data in user_tasklist:
             user_tasklist.remove(data)
             user_completed_tasks.append(data)
+            character_exp_up(user_id)
 
+        
         if not user_tasklist:
             await query.edit_message_text("✅ Ya no quedan tareas pendientes para completar")
             return ConversationHandler.END
@@ -236,6 +242,8 @@ async def complete_button(update:Update, context:CallbackContext):
         "Tarea marcada como completada. Toca otra para seguir completando tareas o finaliza la operación:",
         reply_markup=reply_markup
     )
+
+    
 
     return COMPLETE
 
