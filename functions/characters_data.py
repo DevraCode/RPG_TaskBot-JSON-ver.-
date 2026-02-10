@@ -12,6 +12,8 @@ male_warrior_01 = "assets/characters/warrior/male_warrior_01.webm"
 female_warrior_01 ="assets/characters/warrior/female_warrior_01.webm"
 male_mage_01 = "assets/characters/mage/male_mage_01.webm"
 female_mage_01 ="assets/characters/mage/female_mage_01.webm"
+male_monk_01 = "assets/characters/monk/male_monk_01.webm"
+female_monk_01 = "assets/characters/monk/female_monk_01.webm"
 
 
 #Definimos las funciones que rellenan el json de los personajes al seleccionarlos
@@ -121,3 +123,53 @@ async def female_mage(update:Update,context):
     await update.effective_message.reply_text(mensaje)
 
 
+#MONJES
+#---------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------
+#Monje
+async def male_monk(update:Update,context):
+    chat_id = update.effective_chat.id
+    user_id = generate_id(chat_id)
+    user = update.effective_user.first_name
+
+    persistence.CHARACTER[user_id] = {
+             'character_name':user,
+             'character_img': "assets/characters/monk/male_monk_01.webm",
+             'character_type':"Monje",
+             'character_exp': 0,
+             'character_level': 0
+    }
+
+    name = persistence.CHARACTER[user_id]['character_name']
+    type = persistence.CHARACTER[user_id]['character_type']
+    level = persistence.CHARACTER[user_id]['character_level']
+    exp = persistence.CHARACTER[user_id]['character_exp']
+    
+    mensaje = f"Nombre: {name}" + "\n" + f"{type}" + "\n" + f"Nivel: {level}" + "\n" + f"EXP: {exp}"
+
+    await update.effective_chat.send_sticker(sticker=persistence.CHARACTER[user_id]['character_img'])
+    await update.effective_message.reply_text(mensaje)
+
+#Monja 
+async def female_monk(update:Update,context):
+    chat_id = update.effective_chat.id
+    user_id = generate_id(chat_id)
+    user = update.effective_user.first_name
+
+    persistence.CHARACTER[user_id] = {
+             'character_name':user,
+             'character_img': "assets/characters/monk/female_monk_01.webm",
+             'character_type':"Monja",
+             'character_exp': 0,
+             'character_level': 0
+    }
+
+    name = persistence.CHARACTER[user_id]['character_name']
+    type = persistence.CHARACTER[user_id]['character_type']
+    level = persistence.CHARACTER[user_id]['character_level']
+    exp = persistence.CHARACTER[user_id]['character_exp']
+    
+    mensaje = f"Nombre: {name}" + "\n" + f"{type}" + "\n" + f"Nivel: {level}" + "\n" + f"EXP: {exp}"
+
+    await update.effective_chat.send_sticker(sticker=persistence.CHARACTER[user_id]['character_img'])
+    await update.effective_message.reply_text(mensaje)
