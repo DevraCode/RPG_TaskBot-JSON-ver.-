@@ -8,7 +8,7 @@ from telegram.ext import CallbackContext, ConversationHandler
 import data.persistence as persistence
 from data.security import generate_id, verify_user, has_character_selected
 
-from functions.characters_functions import character_exp_up
+from functions.characters_functions import character_exp_up, character_level_up
 
 import asyncio
 #TASK FUNCTIONS
@@ -235,11 +235,24 @@ async def complete_button(update:Update, context:CallbackContext):
             nuevo_teclado = auxiliar_exp_button(data)
             await query.edit_message_reply_markup(reply_markup=nuevo_teclado)
             await asyncio.sleep(1)
+
             
 
         if not user_tasklist:
+            character_exp = persistence.CHARACTER[user_id]["character_exp"] 
+
             await query.edit_message_text(f"✅ Ya no quedan tareas pendientes para completar")
+
+            await context.bot.send_message(chat_id=chat_id, text=f"Has acumulado {character_exp} EXP")
+            
+            if character_level_up(user_id):
+               nuevo_nivel = persistence.CHARACTER[user_id]["character_level"]
+               await context.bot.send_message(chat_id=chat_id, text=f"🎊 ¡Has subido al nivel {nuevo_nivel}! 🎊")
+
             return ConversationHandler.END
+        
+
+        
 
 
         keyboard = []
