@@ -40,8 +40,7 @@ Y el bot responder√° con un mensaje de bienvenida al usuario, en el que saludar√
 ### Important
 This bot is designed for home use with few users, as the (encrypted) data is stored in JSON files. Obviously, it will not be able to handle many simultaneous connections at the same time.
 For the bot to be scalable, it would be best to migrate to a database and have an API provide you with the character data (which I will do in the future).
-The idea for this bot arose from the need to improve productivity through tasks and reminders, with a fun approach to motivate the user. 
-As if it were a role-playing game, the user will choose one of the available characters and level up as they complete tasks.
+
 
 ### Why an RPG task bot?
 The idea for this bot arose from the need to improve productivity through tasks and reminders, with a fun approach to motivate the user.
