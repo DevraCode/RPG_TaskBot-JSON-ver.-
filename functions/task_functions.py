@@ -6,7 +6,7 @@ from telegram.ext import CallbackContext, ConversationHandler
 #---------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------
 import data.persistence as persistence
-from data.security import generate_id, verify_user, has_character_selected
+from data.security import generate_id, verify_user, not_character_selected
 
 from functions.characters_functions import character_exp_up, character_level_up
 
@@ -20,7 +20,7 @@ TASK_NAME = range(1)
 
 #Pregunta primero el nombre de la tarea
 @verify_user #Verifica que exista el usuario
-@has_character_selected #Verifica que el usuario haya elegido personaje
+@not_character_selected #Verifica que el usuario haya elegido personaje
 async def new_task(update:Update, context:CallbackContext, user_id):
     await update.message.reply_text(f"Escribe un nombre para la tarea")
     return TASK_NAME

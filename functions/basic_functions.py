@@ -58,6 +58,7 @@ async def delete_user(update:Update, context, user_id):
         
     persistence.REGISTERED_USERS.pop(user_id)
     persistence.TASKLIST.pop(user_id)
+    persistence.CHARACTER.pop(user_id)
 
     current_jobs = context.job_queue.get_jobs_by_name(str(user_id))
     for job in current_jobs:

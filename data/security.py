@@ -38,7 +38,7 @@ def verify_user(func):
     return verify
 
 
-def has_character_selected(func):
+def not_character_selected(func):
     @wraps(func)
     async def verify_character(update:Update, context:CallbackContext, *args, **kwargs):
         chat_id = update.effective_chat.id
@@ -49,3 +49,17 @@ def has_character_selected(func):
             return
         return await func(update,context,*args,**kwargs)
     return verify_character
+
+
+def has_character_selected(func):
+    @wraps(func)
+    async def verify_character(update:Update, context:CallbackContext, *args, **kwargs):
+        chat_id = update.effective_chat.id
+        user_id = generate_id(chat_id)
+
+        if user_id in persistence.CHARACTER:
+            await context.bot.send_message(chat_id=chat_id, text=f"Ya tienes asignado un personaje")
+            return
+        return await func(update,context,*args,**kwargs)
+    return verify_character
+

@@ -4,7 +4,7 @@ from telegram.ext import CallbackContext, ConversationHandler
 #---------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------
 import data.persistence as persistence
-from data.security import verify_user
+from data.security import verify_user, not_character_selected, has_character_selected
 from functions.basic_functions import generate_id
 from functions.characters_data import male_warrior_01, female_warrior_01, male_mage_01, female_mage_01, male_monk_01, female_monk_01, male_archer_01, female_archer_01
 from functions.characters_data import male_warrior, female_warrior, male_mage, female_mage, male_monk, female_monk, male_archer, female_archer
@@ -34,6 +34,7 @@ character_type = ["Guerrero", "Guerrera", "Mago", "Maga", "Monje", "Monja", "Arq
 
 #Muestra el primer personaje de la lista, y a partir de ahi, los demás
 @verify_user
+@has_character_selected
 async def show_characters(update: Update, context: CallbackContext, user_id):
     
     chat_id = update.effective_chat.id
@@ -107,7 +108,7 @@ async def characters_buttons(update: Update, context: CallbackContext):
     
 #---------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------
-
+@not_character_selected
 async def character_status(update:Update,context):
     chat_id = update.effective_chat.id
     user_id = generate_id(chat_id)
