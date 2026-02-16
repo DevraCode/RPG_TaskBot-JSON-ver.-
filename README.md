@@ -1,5 +1,11 @@
 # <img width="99" height="101" alt="espadas-ezgif com-gif-maker (1) (1)" src="https://github.com/user-attachments/assets/2b223684-1a8c-4892-b718-ee356fbfa3a1" /> RPG TaskBot <img width="99" height="101" alt="espadas-ezgif com-gif-maker (1) (1)" src="https://github.com/user-attachments/assets/16710121-78cc-4480-9579-0dad964cc930" />
 ## Spanish
+
+### Importante
+Este bot está diseñado para usarlo de forma casera con pocos usuarios, ya que los datos (encriptados) se guardan en archivos JSON. Evidentemente, no aguantará muchas conexiones simultáneas al mismo tiempo.
+Para la escalabilidad del bot, lo suyo es migrar a una base de datos y que una API te proporcione los datos de los personajes (Cosa que haré en un futuro).
+
+### ¿Por qué un bot de tareas RPG?
 La idea de este bot surge de la necesidad de mejorar la productividad mediante tareas y recordatorios, con un enfoque divertido para motivar al usuario.
 Como si un juego de rol se tratase, el usuario eligirá a uno de los personajes disponibles y subirá de nivel a medida que vaya completando tareas.
 
@@ -30,7 +36,15 @@ Y el bot responderá con un mensaje de bienvenida al usuario, en el que saludar�
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## English
+
+### Important
+This bot is designed for home use with few users, as the (encrypted) data is stored in JSON files. Obviously, it will not be able to handle many simultaneous connections at the same time.
+For the bot to be scalable, it would be best to migrate to a database and have an API provide you with the character data (which I will do in the future).
 The idea for this bot arose from the need to improve productivity through tasks and reminders, with a fun approach to motivate the user. 
+As if it were a role-playing game, the user will choose one of the available characters and level up as they complete tasks.
+
+### Why an RPG task bot?
+The idea for this bot arose from the need to improve productivity through tasks and reminders, with a fun approach to motivate the user.
 As if it were a role-playing game, the user will choose one of the available characters and level up as they complete tasks.
 
 ### Starting the bot
