@@ -8,7 +8,7 @@ from telegram.ext import CallbackContext, ConversationHandler
 import data.persistence as persistence
 from data.security import generate_id, verify_user, not_character_selected
 
-from functions.characters_functions import character_exp_up, character_level_up
+from functions.characters_functions import character_exp_up, character_level_up, character_evolution
 
 import asyncio
 #TASK FUNCTIONS
@@ -240,7 +240,8 @@ async def complete_button(update:Update, context:CallbackContext):
             
 
         if not user_tasklist:
-            character_exp = persistence.CHARACTER[user_id]["character_exp"] 
+            character_exp = persistence.CHARACTER[user_id]["character_exp"]
+            character_level = persistence.CHARACTER[user_id]["character_level"]
 
             await query.edit_message_text(f"✅ Ya no quedan tareas pendientes para completar")
 
@@ -250,6 +251,11 @@ async def complete_button(update:Update, context:CallbackContext):
             if character_level_up(user_id, character_exp): # == True. Devuelve false si la experiencia no llega para subir de nivel
                nuevo_nivel = persistence.CHARACTER[user_id]["character_level"] #Se  vuelve a leer el JSON actualizado
                await context.bot.send_message(chat_id=chat_id, text=f"🎊 ¡Has subido al nivel {nuevo_nivel}! 🎊")
+            
+            if character_evolution(user_id, character_level):
+                await context.bot.send_message(chat_id=chat_id, text=f"Has evolucionado al personaje")
+
+            
 
             return ConversationHandler.END
         

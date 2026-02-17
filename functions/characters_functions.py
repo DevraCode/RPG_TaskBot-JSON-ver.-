@@ -150,4 +150,17 @@ def character_level_up(user_id, character_exp):
     return False
 
 
+def character_evolution(user_id, character_level):
     
+    needed_character_level = 2 
+    
+
+    #Si el nivel actual del personaje supera al necesario
+    if character_level >= needed_character_level: 
+        print(f"{needed_character_level} Funciona")
+
+        return True
+    
+    return False
+
+
