@@ -8,6 +8,8 @@ from functions.basic_functions import generate_id
 #DEFINIR PERSONAJES
 
 #Definimos las rutas de las imágenes de los personajes que se usaran para la función show_characters definida en characters_functions.py y SOLO PARA MOSTRAR
+
+#Personaje básico
 male_warrior_01 = "assets/characters/warrior/male_warrior_01.webm"
 female_warrior_01 ="assets/characters/warrior/female_warrior_01.webm"
 male_mage_01 = "assets/characters/mage/male_mage_01.webm"
@@ -16,6 +18,21 @@ male_monk_01 = "assets/characters/monk/male_monk_01.webm"
 female_monk_01 = "assets/characters/monk/female_monk_01.webm"
 male_archer_01 = "assets/characters/archer/male_archer_01.webm"
 female_archer_01 = "assets/characters/archer/female_archer_01.webm"
+
+#Primera evolución
+male_paladin_01 = "assets/characters/warrior/male_paladin_01.webm"
+female_paladin_01 ="assets/characters/warrior/female_paladin_01.webm"
+male_wizard_01 = "assets/characters/mage/male_wizard_01.webm"
+female_wizard_01 ="assets/characters/mage/female_wizard_01.webm"
+male_champion_01 = "assets/characters/monk/male_champion_01.webm"
+female_champion_01 = "assets/characters/monk/female_champion_01.webm"
+male_hunter_01 = "assets/characters/archer/male_hunter_01.webm"
+female_hunter_01 = "assets/characters/archer/female_hunter_01.webm"
+
+
+
+
+
 
 
 #Definimos las funciones que rellenan el json de los personajes al seleccionarlos
