@@ -27,7 +27,8 @@ character_select = {
     female_archer_01: female_archer
 }
 
-character_type = ["Guerrero", "Guerrera", "Mago", "Maga", "Monje", "Monja", "Arquero", "Arquera"] #Clases de personajes
+character_type = ["Guerrero", "Guerrera", "Mago", "Maga", "Monje", "Monja", "Arquero", "Arquera"]
+character_genders = ["male", "female"] 
 
 #---------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------
@@ -155,14 +156,35 @@ def character_level_up(user_id):
     return False 
 
 
-def character_evolution(user_id, character_level):
+def character_evolution(user_id):
+    evolution_1st = {
+        "Guerrero" : "Paladín",
+        "Guerrera" : "Paladín",
+        "Mago" : "Brujo",
+        "Maga" : "Bruja",
+        "Monje" : "Campeón",
+        "Monja" : "Campeona",
+        "Arquero" : "Cazador",
+        "Arquera" : "Cazadora"
+    }
+
     
-    needed_character_level = 2 
+
+    character_class= persistence.CHARACTER[user_id]["character_type"] #Clase actual del personaje
+    character_1st = evolution_1st.get(character_class, character_class)
+    
+    current_character_level = persistence.CHARACTER[user_id]["character_level"]
+    needed_character_level = persistence.CHARACTER[user_id]["needed_lv"] 
     
 
     #Si el nivel actual del personaje supera al necesario
-    if character_level >= needed_character_level: 
+    if current_character_level >= needed_character_level: 
         print(f"{needed_character_level} Funciona")
+        new_needed_character_level = needed_character_level + 1
+        persistence.CHARACTER[user_id]["needed_lv"] = new_needed_character_level
+        persistence.CHARACTER[user_id]["character_type"] = character_1st
+
+    
 
         return True
     

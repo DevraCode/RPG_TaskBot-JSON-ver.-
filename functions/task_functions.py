@@ -240,7 +240,7 @@ async def complete_button(update:Update, context:CallbackContext):
             
 
         if not user_tasklist:
-            
+            character_exp = persistence.CHARACTER[user_id]["character_exp"]
             character_level = persistence.CHARACTER[user_id]["character_level"]
 
             await query.edit_message_text(f"✅ Ya no quedan tareas pendientes para completar")
@@ -252,7 +252,7 @@ async def complete_button(update:Update, context:CallbackContext):
                nuevo_nivel = persistence.CHARACTER[user_id]["character_level"] #Se  vuelve a leer el JSON actualizado
                await context.bot.send_message(chat_id=chat_id, text=f"🎊 ¡Has subido al nivel {nuevo_nivel}! 🎊")
             
-            if character_evolution(user_id, character_level):
+            if character_evolution(user_id):
                 await context.bot.send_message(chat_id=chat_id, text=f"Has evolucionado al personaje")
 
             
