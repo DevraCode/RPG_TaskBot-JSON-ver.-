@@ -117,8 +117,9 @@ async def character_status(update:Update,context):
     type = persistence.CHARACTER[user_id]['character_type']
     level = persistence.CHARACTER[user_id]['character_level']
     exp = persistence.CHARACTER[user_id]['character_exp']
+    exp_needed = persistence.CHARACTER[user_id]["exp_needed"]
 
-    mensaje = f"Nombre: {name}" + "\n" + f"{type}" + "\n" + f"Nivel: {level}" + "\n" + f"EXP: {exp}"
+    mensaje = f"Nombre: {name}" + "\n" + f"{type}" + "\n" + f"Nivel: {level}" + "\n" + f"EXP: {exp}" + "\n" + f"EXP Restante: {exp_needed}"
 
     await update.effective_chat.send_sticker(sticker=persistence.CHARACTER[user_id]['character_img'])
     await update.effective_message.reply_text(mensaje)
@@ -135,19 +136,23 @@ def character_exp_up(user_id):
     exp = str(contador)
     persistence.CHARACTER[user_id]["character_exp"] = contador
     
-def character_level_up(user_id, character_exp):
+
+def character_level_up(user_id):
     
     current_level = persistence.CHARACTER[user_id]["character_level"]
-
-    exp_needed = current_level * 1000 #EXP necesaria para el siguiente nivel
+    character_exp = persistence.CHARACTER[user_id]["character_exp"]
+    exp_needed = persistence.CHARACTER[user_id]["exp_needed"]
 
     if character_exp >= exp_needed: 
         new_level = current_level + 1
         persistence.CHARACTER[user_id]["character_level"] = new_level
 
+        new_exp_needed = exp_needed * 2
+        persistence.CHARACTER[user_id]["exp_needed"]= new_exp_needed
+
         return True #Devuelve true si se cumple la condición
     
-    return False
+    return False 
 
 
 def character_evolution(user_id, character_level):

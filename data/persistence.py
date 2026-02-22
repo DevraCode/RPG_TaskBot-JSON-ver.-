@@ -157,9 +157,9 @@ def load_data():
     load_users()
     load_character()
     load_tasklist()
-    load_reminders()
+    #load_reminders()
 
 atexit.register(save_users)
 atexit.register(save_character)
 atexit.register(save_tasklist)
-atexit.register(save_reminders)
+#atexit.register(save_reminders)

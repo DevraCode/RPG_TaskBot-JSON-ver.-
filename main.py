@@ -11,8 +11,6 @@ from data.time_zone import ZONE, DIAS
 from functions.basic_functions import start, delete_user
 from functions.task_functions import TASK_NAME, DELETE, COMPLETE
 from functions.task_functions import new_task, add_task, show_pending_tasks, delete_task, delete_button, cancel, complete_task, complete_button
-from functions.reminders_functions import NAME,DAY,HOUR,MINUTE
-from functions.reminders_functions import reminder_name, get_reminder_name, get_day_frequency_buttons, get_hour, get_minute, save_and_finish
 from functions.menu import menu
 
 from functions.characters_functions import show_characters, characters_buttons, character_status
@@ -79,22 +77,13 @@ def main():
         per_message=False)
     
       
-    reminder_handler = ConversationHandler(
-        entry_points=[CommandHandler("reminder", reminder_name)],
-        states={
-            NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_reminder_name)],
-            DAY: [CallbackQueryHandler(get_day_frequency_buttons)],
-            HOUR: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_hour)],
-            MINUTE: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_minute)]
-        },
-        fallbacks=[CommandHandler("cancel", cancel)],
-        per_message=False)
+    
     
     
     app.add_handler(add_task_conv_handler)
     app.add_handler(del_task_conv_handler)
     app.add_handler(complete_task_handler)
-    app.add_handler(reminder_handler)
+    
 
    
 
