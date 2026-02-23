@@ -195,7 +195,7 @@ def character_evolution(user_id):
     #Si el nivel actual del personaje supera al necesario
     if current_character_level >= needed_character_level: 
         print(f"{needed_character_level} Funciona")
-        new_needed_character_level = needed_character_level + 1
+        new_needed_character_level = needed_character_level * 2
         persistence.CHARACTER[user_id]["needed_lv"] = new_needed_character_level
         persistence.CHARACTER[user_id]["character_type"] = character_1st
         persistence.CHARACTER[user_id]["character_img"] = character_image_1st

@@ -261,6 +261,7 @@ async def complete_button(update:Update, context:CallbackContext):
             
             else:
                 await character_status(update,context)
+                
             
 
             return ConversationHandler.END
