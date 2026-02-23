@@ -52,7 +52,7 @@ async def male_warrior(update:Update,context):
              'character_gender' : 'male',
              'character_exp': 0,
              'exp_needed': 1000,
-             'needed_lv' : 2,
+             'needed_lv' : 3,
              'character_level': 1
     }
 
