@@ -6,7 +6,7 @@ from telegram.ext import CallbackContext, ConversationHandler
 import data.persistence as persistence
 from data.security import verify_user, not_character_selected, has_character_selected
 from functions.basic_functions import generate_id
-from functions.characters_data import male_warrior_01, female_warrior_01, male_mage_01, female_mage_01, male_monk_01, female_monk_01, male_archer_01, female_archer_01, male_paladin_01, female_paladin_01, male_wizard_01, female_wizard_01, male_champion_01, female_champion_01, male_hunter_01, female_hunter_01
+from functions.characters_data import male_warrior_01, female_warrior_01, male_mage_01, female_mage_01, male_monk_01, female_monk_01, male_archer_01, female_archer_01, male_knight_01, female_knight_01, male_wizard_01, female_wizard_01, male_champion_01, female_champion_01, male_hunter_01, female_hunter_01
 from functions.characters_data import male_warrior, female_warrior, male_mage, female_mage, male_monk, female_monk, male_archer, female_archer
 
 #---------------------------------------------------------------------------------------------------
@@ -158,8 +158,8 @@ def character_level_up(user_id):
 
 def character_evolution(user_id):
     evolution_1st = {
-        "Guerrero" : "Paladín",
-        "Guerrera" : "Paladín",
+        "Guerrero" : "Caballero",
+        "Guerrera" : "Caballera",
         "Mago" : "Brujo",
         "Maga" : "Bruja",
         "Monje" : "Campeón",
@@ -169,8 +169,8 @@ def character_evolution(user_id):
     }
 
     evolution_1s_images = {
-        male_warrior_01 : male_paladin_01,
-        female_warrior_01 : female_paladin_01,
+        male_warrior_01 : male_knight_01,
+        female_warrior_01 : female_knight_01,
         male_mage_01 : male_wizard_01,
         female_mage_01 : female_wizard_01,
         male_monk_01 : male_champion_01,

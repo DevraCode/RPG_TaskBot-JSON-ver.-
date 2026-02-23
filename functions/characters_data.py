@@ -20,8 +20,8 @@ male_archer_01 = "assets/characters/archer/male_archer_01.webm"
 female_archer_01 = "assets/characters/archer/female_archer_01.webm"
 
 #Primera evolución
-male_paladin_01 = "assets/characters/warrior/male_paladin_01.webm"
-female_paladin_01 ="assets/characters/warrior/female_paladin_01.webm"
+male_knight_01 = "assets/characters/warrior/male_knight_01.webm"
+female_knight_01 ="assets/characters/warrior/female_knight_01.webm"
 male_wizard_01 = "assets/characters/mage/male_wizard_01.webm"
 female_wizard_01 ="assets/characters/mage/female_wizard_01.webm"
 male_champion_01 = "assets/characters/monk/male_champion_01.webm"
